@@ -24,10 +24,47 @@ package com.practice.data_structure_and_algorithm.Stack;
     Output: false
  */
 
+import java.util.Stack;
+
 public class ValidParenthesis {
     public static void main(String[] args) {
 
+        String s = "()[]{}";
+        boolean result = isValid(s);
+        System.out.println(result);
 
+    }
+
+
+    public static boolean isValid(String s) {
+        // if(s.length() == 1){
+        //     return false;
+        // }
+        Stack<Character> stack = new Stack<>();
+        boolean result = false;
+
+
+        for(char c : s.toCharArray()){
+            if(c == '(' || c == '[' || c == '{'){
+                stack.add(c);
+            }else{
+                if(stack.isEmpty()){
+                    return result;
+                }
+
+                char temp = stack.pop();
+
+                if( c == ')' && temp != '(' || c == ']' && temp != '[' || c == '}' && temp != '{'){
+                    return result;
+                }
+            }
+        }
+
+        if(stack.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
 
     }
 }
