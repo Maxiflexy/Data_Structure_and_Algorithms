@@ -12,8 +12,9 @@ public class Practice {
         String[] result = generateBinaryNumbers(n);
         System.out.println(Arrays.toString(result));
 
-
     }
+
+
     public static String[] generateBinaryNumbers(int n){
 
         Queue<String> integerQueue = new LinkedList<>();
@@ -32,4 +33,10 @@ public class Practice {
 
         return result;
     }
+
+    public static void deQueue(){
+
+    }
+
+
 }
