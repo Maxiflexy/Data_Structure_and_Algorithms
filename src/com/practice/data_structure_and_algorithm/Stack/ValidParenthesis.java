@@ -46,7 +46,7 @@ public class ValidParenthesis {
 
         for(char c : s.toCharArray()){
             if(c == '(' || c == '[' || c == '{'){
-                stack.add(c);
+                stack.push(c);
             }else{
                 if(stack.isEmpty()){
                     return result;
@@ -60,11 +60,14 @@ public class ValidParenthesis {
             }
         }
 
-        if(stack.isEmpty()){
-            return true;
-        }else{
-            return false;
-        }
+        return stack.isEmpty();
+
+
+//        if(stack.isEmpty()){
+//            return true;
+//        }else{
+//            return false;
+//        }
 
     }
 }
