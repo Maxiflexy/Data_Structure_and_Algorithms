@@ -42,5 +42,13 @@ public class UndirectedGraph {
         System.out.println(graph);
 
 
+        UndirectedGraph graph1 = new UndirectedGraph(4);
+        graph1.addEdge(0, 3);
+        graph1.addEdge(1, 2);
+        graph1.addEdge(3, 1);
+        graph1.addEdge(2, 0);
+        System.out.println(graph1);
+
+
     }
 }
