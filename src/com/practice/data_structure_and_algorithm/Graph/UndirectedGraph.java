@@ -1,6 +1,8 @@
 package com.practice.data_structure_and_algorithm.Graph;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class UndirectedGraph {
@@ -64,6 +66,7 @@ public class UndirectedGraph {
         }
     }
 
+
     public static void main(String[] args) {
 
         UndirectedGraph graph = new UndirectedGraph(4);
@@ -74,15 +77,69 @@ public class UndirectedGraph {
         System.out.println(graph);
 
 
-        UndirectedGraph graph1 = new UndirectedGraph(5);
-        graph1.addEdge2(0, 1);
-        graph1.addEdge2(1, 2);
-        graph1.addEdge2(2, 3);
-        graph1.addEdge2(3, 0);
-        graph1.addEdge2(2, 4);
-        graph1.breadthFirstSearch(0);
+//        UndirectedGraph graph1 = new UndirectedGraph(5);
+//        graph1.addEdge2(0, 1);
+//        graph1.addEdge2(1, 2);
+//        graph1.addEdge2(2, 3);
+//        graph1.addEdge2(3, 0);
+//        graph1.addEdge2(2, 4);
+//        graph1.breadthFirstSearch(0);
+
+
+        int n = 3;
+        int[][]edges = {{0,1},{1,2},{2,0}};
+        int source = 0;
+        int destination = 2;
+
+        Solution solution = new Solution();
+        boolean output = solution.validPath(n, edges, source, destination);
+        System.out.println("Output : " + output);
 
 
 
     }
+}
+
+class Solution{
+
+    public boolean validPath(int n, int[][]edges, int source, int destination){
+
+        List<List<Integer>> arrayList = new ArrayList<>();
+        for(int i = 0 ; i < n; i++){
+            arrayList.add(new ArrayList<>());
+        }
+
+        for(int[] e : edges){
+            int u = e[0];
+            int v = e[1];
+            arrayList.get(u).add(v);
+            arrayList.get(v).add(u);
+        }
+
+        boolean[] visited = new boolean[n];
+
+        return dfs(visited, arrayList, source, destination);
+
+    }
+
+    private  boolean dfs(boolean[] visited, List<List<Integer>> arrayList, int source, int destination){
+        if(source == destination)
+            return true;
+
+        visited[source] = true;
+
+        for(int neighbour : arrayList.get(source)){
+            if(!visited[neighbour]){
+                if(dfs(visited, arrayList, source, destination)){
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+
+
+
 }
