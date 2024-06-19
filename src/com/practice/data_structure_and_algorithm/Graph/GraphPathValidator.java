@@ -64,7 +64,7 @@ public class GraphPathValidator {
             }
         }
 
-        // Step 4: If BFS completes without finding destination
+        // Step 4: If BFS completes without finding a destination
         return false;
     }
 }
