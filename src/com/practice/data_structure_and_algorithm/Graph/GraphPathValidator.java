@@ -22,11 +22,11 @@ public class GraphPathValidator {
 
 
 
-        boolean pathExists = validPath(n, edges, source, destination);
+        boolean pathExists = validPath1(n, edges, source, destination);
         System.out.println("Does path exist from " + source + " to " + destination + "? " + pathExists);
     }
 
-    public static boolean validPath(int n, int[][] edges, int source, int destination) {
+    public static boolean validPath1(int n, int[][] edges, int source, int destination) {
         // Step 1: Build adjacency list representation of the graph
         Map<Integer, List<Integer>> graph = new HashMap<>();
         for (int[] edge : edges) {
@@ -66,5 +66,52 @@ public class GraphPathValidator {
 
         // Step 4: If BFS completes without finding a destination
         return false;
+    }
+
+    public boolean validPath2(int n, int[][] edges, int source, int destination) {
+        // Initialize graph as an adjacency list
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            graph.put(i, new ArrayList<>());
+        }
+        
+        /*
+        n = 3, edges = [[0,1],[1,2],[2,0]], source = 0, destination = 2
+         */
+
+        // Build the graph manually
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            if (!graph.containsKey(u)) {
+                graph.put(u, new ArrayList<>());
+            }
+            if (!graph.containsKey(v)) {
+                graph.put(v, new ArrayList<>());
+            }
+            graph.get(u).add(v);
+            graph.get(v).add(u);
+        }
+
+        // Initialize visited set
+        Set<Integer> visited = new HashSet<>();
+
+        // Depth-First Search (DFS)
+        Stack<Integer> stack = new Stack<>();
+        stack.push(source);
+
+        while (!stack.isEmpty()) {
+            int vertex = stack.pop();
+            if (!visited.contains(vertex)) {
+                visited.add(vertex);
+                for (int neighbor : graph.get(vertex)) {
+                    if (!visited.contains(neighbor)) {
+                        stack.push(neighbor);
+                    }
+                }
+            }
+        }
+
+        return visited.contains(destination);
     }
 }
